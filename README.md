@@ -69,8 +69,8 @@ grafana:
 ```
 
 
- ###PROMETHEUS
- i) Decide the size
+ Add the Prometheus specification in values.yaml  
+ i) Decide the size  
 
 ```yaml
  storageSpec:
