@@ -18,7 +18,7 @@
 🔧 Tolerations
 
 ```yaml
-tolerations:
+tolerations: []
   # Example:
   #- key: "key"
   #  operator: "Equal"
@@ -31,12 +31,14 @@ tolerations:
 Used to define CPU and memory limits for pods.
 
 ```yaml
-resources:
+resources: {}
   #requests:
   #  memory: 400Mi
   #  cpu: 200m
 ```
 
+
+```yaml
 ###ALERTMANAGER
 alertmanagerSpec:
    storage: 
@@ -48,8 +50,9 @@ alertmanagerSpec:
            requests:
              storage: 20Gi
 
+```
 
-
+```yaml
  ###GRAFANA
 i) Decide the size
 ii) let the admin user be admin and let the grafana create the passowrd which is stored as secret
@@ -60,8 +63,9 @@ grafana:
       accessModes:
         - ReadWriteOnce
       size: 20Gi
+```
 
-
+```yaml
  ###PROMETHEUS
  i) Decide the size
  storageSpec:
@@ -73,7 +77,9 @@ grafana:
             requests:
               storage: 20Gi 
 
+```
 
+```
 THIS IS SLACK BASED ALERTMANAGER.YAML
 
 1. Create a Slack Channel
@@ -104,7 +110,9 @@ THIS IS SLACK BASED ALERTMANAGER.YAML
             https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
       This is what you use in alertmanager.yaml
 
+```
 
+```yaml
 ii) Change the Slack URL here and repeat interval i.e no of hours you want in values.yaml 
 
   config:
@@ -157,5 +165,6 @@ ii) Change the Slack URL here and repeat interval i.e no of hours you want in va
         text: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
     templates:
     - '/etc/alertmanager/config/*.tmpl'
+```
 
 
