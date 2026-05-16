@@ -10,9 +10,9 @@
   iii) If you want even you can decide the Resource Limits 
 
 
-⚙️ General Configurations for All Pods
+**⚙️ General Configurations for All Pods**
 
-⚠️ These values must be added in the correct places in values.yaml (do NOT copy-paste blindly)
+**⚠️ These values must be added in the correct places in values.yaml (do NOT copy-paste blindly)**
 
 
 🔧 Tolerations
