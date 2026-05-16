@@ -89,26 +89,26 @@ This is the Slack Based Alert Manager.yaml
 
 1. Create a Slack Channel  
    
-   i)Open Slack (web or app)  
-   ii)Click “+” next to Channels  
-   iii)Choose Create a channel  
-   iv)Name it like:  
-      alerts-monitoring  
-   v)Click Create  
+   i) Open Slack (web or app)  
+   ii) Click “+” next to Channels  
+   iii) Choose Create a channel  
+   iv) Name it like:  
+       alerts-monitoring  
+   v) Click Create  
 
 2. Create Slack App (for Webhook)  
-   i)Go to: https://api.slack.com/apps  
-   ii)Click Create New App  
-   iii)Choose From scratch  
-   iv) App Name: Alertmanager  
+   i) Go to: https://api.slack.com/apps  
+   ii) Click Create New App  
+   iii) Choose From scratch  
+   iv)  App Name: Alertmanager  
    v) Pick your workspace → Create App  
 
 3. Enable Incoming Webhooks  
-   i)Inside your app, go to Incoming Webhooks  
-   ii)Toggle Activate Incoming Webhooks = ON  
-   iii)Click Add New Webhook to Workspace  
-   iv)Select your channel (alerts-monitoring)  
-   v)Click Allow  
+   i) Inside your app, go to Incoming Webhooks  
+   ii) Toggle Activate Incoming Webhooks = ON  
+   iii) Click Add New Webhook to Workspace  
+   iv) Select your channel (alerts-monitoring)  
+   v) Click Allow  
 
 4. Get Webhook URL (IMPORTANT)  
       You will get a URL like:  
