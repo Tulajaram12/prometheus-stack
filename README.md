@@ -54,9 +54,9 @@ alertmanagerSpec:
 ```
 
 
- ###GRAFANA
-i) Decide the size
-ii) let the admin user be admin and let the grafana create the passowrd which is stored as secret
+ Add the Grafana spec as below  
+i) Decide the size  
+ii) let the admin user be admin and let the grafana create the password which is stored as secret    
 
 ``` yaml
 grafana:
