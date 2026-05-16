@@ -39,8 +39,8 @@ resources: {}
 ```
 
 
+Add the Alert Manager Specification in values.yaml  
 ```yaml
-###ALERTMANAGER
 alertmanagerSpec:
    storage: 
       volumeClaimTemplate:
