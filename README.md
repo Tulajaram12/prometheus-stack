@@ -4,10 +4,10 @@
 
  See Design must be like below
 1) if you have separate Node group for the EKS Cluster in the specific availability zone , the nodes are launched in specific az as the requirement is that we have pv for all the three prometheus, grafana and alertmanager.
-2) I have added Below config in values.yaml file for the Prometheus
-    i) First have the storage class created with waitforfirstconsumer and with the policy Retain and CHANGE THE STORAGE CLASS NAME
-   ii) Decide the Storage with the Client How much GB you want and Change it
-  iii) If you want even you can decide the Resource Limits 
+2) I have added Below config in values.yaml file for the Prometheus  
+    i) First have the storage class created with waitforfirstconsumer and with the policy Retain and CHANGE THE STORAGE CLASS NAME  
+   ii) Decide the Storage with the Client How much GB you want and Change it  
+  iii) If you want even you can decide the Resource Limits  
 
 
 **⚙️ General Configurations for All Pods**  
