@@ -52,10 +52,12 @@ alertmanagerSpec:
 
 ```
 
-```yaml
+
  ###GRAFANA
 i) Decide the size
 ii) let the admin user be admin and let the grafana create the passowrd which is stored as secret
+
+``` yaml
 grafana:
    persistence:
       enabled: true
@@ -65,9 +67,11 @@ grafana:
       size: 20Gi
 ```
 
-```yaml
+
  ###PROMETHEUS
  i) Decide the size
+
+```yaml
  storageSpec:
       volumeClaimTemplate:
         spec:
@@ -79,7 +83,7 @@ grafana:
 
 ```
 
-```
+
 THIS IS SLACK BASED ALERTMANAGER.YAML
 
 1. Create a Slack Channel
@@ -110,7 +114,6 @@ THIS IS SLACK BASED ALERTMANAGER.YAML
             https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
       This is what you use in alertmanager.yaml
 
-```
 
 ```yaml
 ii) Change the Slack URL here and repeat interval i.e no of hours you want in values.yaml 
