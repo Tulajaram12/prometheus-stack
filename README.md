@@ -39,7 +39,7 @@ resources: {}
 ```
 
 
-Add the Alert Manager Specification in values.yaml  
+Add the Alert Manager Specification in values.yaml and change the size you want and storageclassname     
 ```yaml
 alertmanagerSpec:
    storage: 
