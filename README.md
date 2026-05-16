@@ -10,25 +10,27 @@
   iii) If you want even you can decide the Resource Limits 
 
 
-📌 General Configurations (Applied to All Pods)
+⚙️ General Configurations for All Pods
 
-⚠️ These values must be placed in the correct sections inside values.yaml.
-Do NOT copy-paste blindly — placement matters.
+⚠️ These values must be added in the correct places in values.yaml (do NOT copy-paste blindly)
 
-🔹 Tolerations & Resources (Global)
-tolerations: []
-# Example:
-# tolerations:
-#   - key: "key"
-#     operator: "Equal"
-#     value: "value"
-#     effect: "NoSchedule"
-
+🔧 Tolerations
+tolerations:
+  # Example:
+  - key: "key"
+    operator: "Equal"
+    value: "value"
+    effect: "NoSchedule"
+💻 Resources
 resources: {}
 # Example:
 # resources:
 #   requests:
 #     memory: 400Mi
+#     cpu: 200m
+#   limits:
+#     memory: 1Gi
+#     cpu: 500m
 
 
 
