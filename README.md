@@ -24,6 +24,7 @@ tolerations:
     operator: "Equal"
     value: "value"
     effect: "NoSchedule"
+```
 💻 Resources
 ## Resources Configuration
 
