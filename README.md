@@ -93,7 +93,7 @@ This is the Slack Based Alert Manager.yaml
    ii) Click “+” next to Channels  
    iii) Choose Create a channel  
    iv) Name it like:  
-       alerts-monitoring  
+          alerts-monitoring  
    v) Click Create  
 
 2. Create Slack App (for Webhook)  
