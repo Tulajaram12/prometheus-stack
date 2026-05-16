@@ -11,7 +11,8 @@
 
 
 **⚙️ General Configurations for All Pods**
-
+        **1) Tolerations**
+        **2) Resources**
 **⚠️ These values must be added in the correct places in values.yaml (do NOT copy-paste blindly)**
 
 
