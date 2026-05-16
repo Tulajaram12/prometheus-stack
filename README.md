@@ -20,10 +20,10 @@
 ```yaml
 tolerations:
   # Example:
-  - key: "key"
-    operator: "Equal"
-    value: "value"
-    effect: "NoSchedule"
+  #- key: "key"
+  #  operator: "Equal"
+  #  value: "value"
+  #  effect: "NoSchedule"
 ```
 💻 Resources
 ## Resources Configuration
@@ -32,10 +32,10 @@ Used to define CPU and memory limits for pods.
 
 ```yaml
 resources:
-  requests:
-    memory: 400Mi
-    cpu: 200m
-
+  #requests:
+  #  memory: 400Mi
+  #  cpu: 200m
+```
 
 ###ALERTMANAGER
 alertmanagerSpec:
