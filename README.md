@@ -14,7 +14,10 @@
 
 ⚠️ These values must be added in the correct places in values.yaml (do NOT copy-paste blindly)
 
+
 🔧 Tolerations
+
+```yaml
 tolerations:
   # Example:
   - key: "key"
@@ -22,16 +25,15 @@ tolerations:
     value: "value"
     effect: "NoSchedule"
 💻 Resources
-resources: {}
-# Example:
-# resources:
-#   requests:
-#     memory: 400Mi
-#     cpu: 200m
-#   limits:
-#     memory: 1Gi
-#     cpu: 500m
+## Resources Configuration
 
+Used to define CPU and memory limits for pods.
+
+```yaml
+resources:
+  requests:
+    memory: 400Mi
+    cpu: 200m
 
 
 ###ALERTMANAGER
