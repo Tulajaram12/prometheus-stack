@@ -28,7 +28,6 @@ tolerations: []
   #  effect: "NoSchedule"
 ```
 💻 Resources
-## Resources Configuration
 
 Used to define CPU and memory limits for pods.
 
