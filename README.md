@@ -232,8 +232,9 @@ spec:
                   number: 9093
 ```
 Command  
+```yaml
 kubectl create -f IngressName.yaml  
-
+```
 Create GrafanaIngress.yaml  
 ```yaml
 
