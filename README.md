@@ -538,7 +538,7 @@ spec:
 
 Command to create prometheus rule  
 
-``yaml
+```yaml
 kubectl create -f prometheusrule.yaml
 ```
 
@@ -568,5 +568,6 @@ spec:
 Now Run the Command  
 ```yaml
 kubectl create -f servicemonitor.yaml
+```
 ```
 
