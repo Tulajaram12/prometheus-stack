@@ -188,4 +188,51 @@ ii) Change the Slack URL here and repeat interval i.e no of hours you want in va
     - '/etc/alertmanager/config/*.tmpl'
 ```
 
+AlertMangerIngress Creation
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alertmanager-ingress
+  namespace: monitoring
+
+  annotations:
+    kubernetes.io/ingress.class: alb
+    # Shared ALB Group
+    alb.ingress.kubernetes.io/group.name: monitoring
+    # Internet Facing ALB
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    # Use Pod IPs as Targets
+    alb.ingress.kubernetes.io/target-type: ip
+    # HTTPS Listener
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    # Redirect HTTP -> HTTPS
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    # ACM Certificate
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-north-1:188776114860:certificate/d99003fb-1027-48bf-8af6-5004baf57a95
+    # Health Check
+    alb.ingress.kubernetes.io/healthcheck-path: /-/healthy
+    alb.ingress.kubernetes.io/healthcheck-port: "9093"
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/success-codes: "200"
+
+spec:
+  ingressClassName: alb
+  rules:
+    - host: alertmanager.tulaja.shop
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: monitoring-kube-prometheus-alertmanager
+                port:
+                  number: 9093
+```
+
+
+                  
+
 
