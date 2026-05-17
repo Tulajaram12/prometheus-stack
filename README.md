@@ -234,7 +234,7 @@ spec:
 Command  
 kubectl create -f IngressName.yaml  
 
-GrafanIngress.yaml  
+Create GrafanaIngress.yaml  
 ```yaml
 
 apiVersion: networking.k8s.io/v1
