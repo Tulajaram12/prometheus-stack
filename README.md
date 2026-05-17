@@ -561,7 +561,7 @@ spec:
       path: /metrics
       interval: 30s
       scheme: http  
-``yaml  
+``
                   
 Now Run the Command  
 ```yaml
