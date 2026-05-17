@@ -563,7 +563,7 @@ spec:
       scheme: http  
 ``yaml  
                   
-Now Run the Command
+Now Run the Command  
 ```yaml
 kubectl create -f servicemonitor.yaml
 ```
