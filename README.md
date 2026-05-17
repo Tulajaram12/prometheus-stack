@@ -330,6 +330,8 @@ Command to Create the Ingress.yaml
 kubectl create -f PrometehusIngress.yaml
 ```
 
+
+Creation of PrometheusRule
 ```yaml  
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -533,7 +535,36 @@ spec:
         summary: "High disk usage on node"
 ```
 
+Command to create prometheus rule  
+``yaml
+kubectl create -f prometheusrule.yaml
+```
 
+Create a Service Monitor   
+```yaml  
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: flask-app-servicemonitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - microservices
+  selector:
+    matchLabels:
+      app: flask2
+  endpoints:
+    - port: flaskport
+      path: /metrics
+      interval: 30s
+      scheme: http  
+``yaml  
                   
-
+Now Run the Command
+```yaml
+kubectl create -f servicemonitor.yaml
+```
 
