@@ -325,10 +325,10 @@ spec:
                   number: 9090
 ```
 
-Command to Create the Ingress.yaml  
-```yaml
+Command to Create the Ingress.yaml    
+```yaml  
 kubectl create -f PrometehusIngress.yaml
-```
+```  
 
 
 Creation of PrometheusRule
