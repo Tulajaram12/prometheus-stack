@@ -188,7 +188,7 @@ ii) Change the Slack URL here and repeat interval i.e no of hours you want in va
     - '/etc/alertmanager/config/*.tmpl'
 ```
 
-AlertMangerIngress Creation
+AlertMangerIngress Creation and use below commmand
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -231,7 +231,8 @@ spec:
                 port:
                   number: 9093
 ```
-
+Command
+kubectl create -f IngressName.yaml
 
                   
 
