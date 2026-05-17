@@ -328,7 +328,211 @@ spec:
 Command to Create the Ingress.yaml  
 ```yaml
 kubectl create -f PrometehusIngress.yaml
-```  
+```
+
+```yaml  
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cluster-and-app-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:        
+  - name: cluster-health
+    rules:
+    - alert: KubeAPIDown
+      expr: up{job="kubernetes-apiservers"} == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes API server is down
+
+    - alert: EtcdInstanceDown
+      expr: up{job="etcd"} == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: etcd instance is down
+  
+    - alert: KubeSchedulerDown
+      expr: up{job="kube-scheduler"} == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Kubernetes Scheduler is down"
+        description: "kube-scheduler is not responding in Prometheus scrape"
+
+    - alert: KubeControllerManagerDown
+      expr: up{job="kube-controller-manager"} == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Kubernetes Controller Manager is down"
+        description: "kube-controller-manager is not responding in Prometheus scrape"  
+
+  - name: pod-status
+    rules:
+    - alert: PodCrashLooping
+      expr: kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: Pod is in CrashLoopBackOff
+
+    - alert: PodNotReady
+      expr: kube_pod_status_ready{condition="true"} == 0
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Pod is not ready
+
+    - alert: PodNotReady
+      expr: kube_pod_status_ready{condition="true"} == 0
+      for: 5m
+      labels:
+        severity: Critical
+      annotations:
+        summary: Pod is not ready
+
+    - alert: PodRestartingFrequently
+      expr: increase(kube_pod_container_status_restarts_total[10m]) > 3
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod restarting frequently"
+        description: "Pod restarted more than 3 times in last 10 minutes"
+
+    - alert: PodErrImagePull
+      expr: kube_pod_container_status_waiting_reason{reason="ErrImagePull"} > 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Pod image pull failed (ErrImagePull)"
+        description: "Kubernetes is unable to pull container image (check image name or registry auth)"
+
+    - alert: PodImagePullBackOff
+      expr: kube_pod_container_status_waiting_reason{reason="ImagePullBackOff"} > 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Pod in ImagePullBackOff"
+        description: "Kubernetes is retrying image pull and backing off"
+
+    - alert: PodOOMKilled
+      expr: kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} == 1
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Pod killed due to OOM"
+        description: "Container exceeded memory limit and was killed"
+
+    - alert: PVCAlmostFull
+      expr: (kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes) * 100 > 80
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "PVC disk usage is high"
+        description: "PVC usage is above 80% for more than 5 minutes"
+
+    - alert: PVCCriticalUsage
+      expr: (kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes) * 100 > 90
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "PVC critically full"
+        description: "PVC usage is above 90%"
+
+  - name: node-status
+    rules:
+    - alert: NodeNotReady
+      expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Node is not ready
+
+    - alert: NodeMemoryPressure
+      expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Node memory pressure
+
+    - alert: NodeDiskPressure
+      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Node disk pressure
+
+    - alert: HighNodeCPUUsage
+      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High CPU usage on node"
+
+    - alert: HighNodeCPUUsage
+      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 90
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High CPU usage on node"
+
+    - alert: HighNodeMemoryUsage
+      expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High memory usage on node"
+
+    - alert: HighNodeMemoryUsage
+      expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High memory usage on node"
+
+    - alert: HighNodeDiskUsage
+      expr: (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} 
+        / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) * 100 > 80
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High disk usage on node"
+
+    - alert: HighNodeDiskUsage
+      expr: (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} 
+        / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) * 100 > 90
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High disk usage on node"
+```
+
                   
 
 
