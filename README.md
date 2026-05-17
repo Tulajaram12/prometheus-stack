@@ -535,7 +535,9 @@ spec:
         summary: "High disk usage on node"
 ```
 
+
 Command to create prometheus rule  
+
 ``yaml
 kubectl create -f prometheusrule.yaml
 ```
@@ -561,7 +563,7 @@ spec:
       path: /metrics
       interval: 30s
       scheme: http  
-``
+```
                   
 Now Run the Command  
 ```yaml
