@@ -150,16 +150,32 @@ spec:
         summary: Node disk pressure
 
     - alert: HighNodeCPUUsage
-      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 0
-      for: 1m
+      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
+      for: 2m
       labels:
         severity: warning
       annotations:
         summary: "High CPU usage on node"
 
+    - alert: HighNodeCPUUsage
+      expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 90
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High CPU usage on node"
+
     - alert: HighNodeMemoryUsage
-      expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 0
-      for: 10s
+      expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High memory usage on node"
+
+    - alert: HighNodeMemoryUsage
+      expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+      for: 2m
       labels:
         severity: warning
       annotations:
@@ -167,9 +183,18 @@ spec:
 
     - alert: HighNodeDiskUsage
       expr: (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} 
-        / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) * 100 > 0
-      for: 10s
+        / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) * 100 > 80
+      for: 2m
       labels:
         severity: warning
+      annotations:
+        summary: "High disk usage on node"
+
+    - alert: HighNodeDiskUsage
+      expr: (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} 
+        / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) * 100 > 90
+      for: 2m
+      labels:
+        severity: critical
       annotations:
         summary: "High disk usage on node"
