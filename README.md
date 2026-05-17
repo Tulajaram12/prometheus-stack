@@ -38,6 +38,23 @@ resources: {}
   #  cpu: 200m
 ```
 
+Create a Storage Class as Below  
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
+  fsType: ext4
+```
+
+
 
 Add the Alert Manager Specification in values.yaml and change the size you want and storageclassname     
 ```yaml
