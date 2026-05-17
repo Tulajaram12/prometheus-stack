@@ -564,7 +564,6 @@ spec:
       interval: 30s
       scheme: http  
 ```
-                  
 Now Run the Command  
 ```yaml
 kubectl create -f servicemonitor.yaml
